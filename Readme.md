@@ -1,11 +1,5 @@
 # TensorFlow ResNet-32 Training for CIFAR-10 dataset (Script for Benchmarking)
 
-★★★
-home/tsmatsuz
-↓
-your_working_dir
-★★★
-
 This python code runs ResNet-32 (without bottleneck) training for [CIFAR-10 dataset](http://www.cs.toronto.edu/~kriz/cifar.html) with TensorFlow framework.
 You can run this code on a variery of devices (CPU, GPU and TPU), and also run on the distributed multiple machines (multiple replicas) with Distributed TensorFlow.
 
@@ -28,9 +22,9 @@ Run the following command.
 
 ```bash
 python cifar10-cnn-tf.py \
-  --train_dir /home/tsmatsuz/cifar-10-batches-bin/ \
-  --test_file /home/tsmatsuz/cifar-10-batches-bin/test_batch.bin \
-  --out_dir /home/tsmatsuz/out
+  --train_dir /your_working_dir/cifar-10-batches-bin/ \
+  --test_file /your_working_dir/cifar-10-batches-bin/test_batch.bin \
+  --out_dir /your_working_dir/out
 ```
 
 ## Run on multiple machines

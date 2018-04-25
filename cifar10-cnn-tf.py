@@ -96,11 +96,14 @@ def _my_model_fn(features, labels, mode):
     train_model.build_graph()
 
     # create evaluation metrices
-    truth = tf.argmax(train_model.labels, axis=1)
-    predictions = tf.argmax(train_model.predictions, axis=1)
-    precision = tf.reduce_mean(tf.to_float(tf.equal(predictions, truth)))
-    accuracy = tf.metrics.accuracy(truth, predictions)
-    tf.summary.scalar('accuracy', accuracy[1]) # output to TensorBoard
+    """ Please umcomment """
+    """ when you output precision and accuracy to TensorBoard or use INFER """
+    #truth = tf.argmax(train_model.labels, axis=1)
+    #predictions = tf.argmax(train_model.predictions, axis=1)
+    #precision = tf.reduce_mean(tf.to_float(tf.equal(predictions, truth)))
+    #accuracy = tf.metrics.accuracy(truth, predictions)
+    #tf.summary.scalar('precision', precision) # output to TensorBoard
+    #tf.summary.scalar('accuracy', accuracy[1]) # output to TensorBoard
 
     # define operations
     if mode == tf.estimator.ModeKeys.TRAIN:
@@ -128,25 +131,26 @@ def _my_model_fn(features, labels, mode):
             training_chief_hooks=[_CustomLogHook()])
     if mode == tf.estimator.ModeKeys.EVAL:
         eval_metric_ops = {
-            'accuracy': accuracy
+#            'accuracy': accuracy
         }
         return tf.estimator.EstimatorSpec(
             mode,
             loss=train_model.cost,
             eval_metric_ops=eval_metric_ops)
-    if mode == tf.estimator.ModeKeys.INFER:
-        probabilities = tf.nn.softmax(train_model.predictions, name='softmax_tensor')
-        predict_outputs = {
-            'classes': predictions,
-            'probabilities': probabilities
-        }
-        export_outputs = {
-            'prediction': tf.estimator.export.PredictOutput(predict_outputs)
-        }
-        return tf.estimator.EstimatorSpec(
-            mode,
-            predictions=predict_outputs,
-            export_outputs=export_outputs)
+    """ Please umcomment when you use INFER """
+    #if mode == tf.estimator.ModeKeys.INFER:
+    #    probabilities = tf.nn.softmax(train_model.predictions, name='softmax_tensor')
+    #    predict_outputs = {
+    #        'classes': predictions,
+    #        'probabilities': probabilities
+    #    }
+    #    export_outputs = {
+    #        'prediction': tf.estimator.export.PredictOutput(predict_outputs)
+    #    }
+    #    return tf.estimator.EstimatorSpec(
+    #        mode,
+    #        predictions=predict_outputs,
+    #        export_outputs=export_outputs)
 
 def main(_):
     # define

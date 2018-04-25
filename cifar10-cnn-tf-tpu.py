@@ -78,8 +78,8 @@ def _my_model_fn(features, labels, mode, params):
     #
     # Model - Here we use pre-built 'resnet_model'
     #
-    model_params = resnet_model_tpu.HParams(
-        batch_size=batch_size / FLAGS.num_replica, # because batch is divided by TPU replicas
+    model_params = resnet_model.HParams(
+        batch_size=int(batch_size / FLAGS.num_replica), # because batch is divided by TPU replicas
         num_classes=10,
         min_lrn_rate=0.0001,
         lrn_rate=0.1,
@@ -88,7 +88,7 @@ def _my_model_fn(features, labels, mode, params):
         weight_decay_rate=0.0002,
         relu_leakiness=0.1,
         optimizer='mom')
-    train_model = resnet_model_tpu.ResNet(
+    train_model = resnet_model.ResNet(
         model_params,
         features,
         labels,
@@ -96,8 +96,8 @@ def _my_model_fn(features, labels, mode, params):
     train_model.build_graph(tpu_opt=True)
 
     # create evaluation metrices
-    truth = tf.argmax(train_model.labels, axis=1)
-    predictions = tf.argmax(train_model.predictions, axis=1)
+    #truth = tf.argmax(train_model.labels, axis=1)
+    #predictions = tf.argmax(train_model.predictions, axis=1)
     #precision = tf.reduce_mean(
     #    tf.to_float(tf.equal(predictions, truth)),
     #    name="precision")
@@ -138,7 +138,7 @@ def main(_):
             log_device_placement=True),
         tpu_config=tpu_config.TPUConfig(
             iterations_per_loop=100,
-            num_shards=FLAGS.num_replica),
+            num_shards=FLAGS.num_replica) # when you skip num_shards, 8 is used.
     )
     cifar10_resnet_classifier = tpu_estimator.TPUEstimator(
         model_fn=_my_model_fn,
@@ -168,7 +168,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--num_replica',
         type=int,
-        default=1,
+        default=1, # Note - 8 is expected behavior in Cloud TPU
         help='Number of TPU chips replica')
     FLAGS, unparsed = parser.parse_known_args()
 

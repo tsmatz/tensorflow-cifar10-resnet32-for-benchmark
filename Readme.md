@@ -3,7 +3,7 @@
 This python code runs ResNet-32 (without bottleneck) training for [CIFAR-10 dataset](http://www.cs.toronto.edu/~kriz/cifar.html) with TensorFlow framework.
 You can run this code on a variery of devices (CPU, GPU and TPU), and also run on the distributed multiple machines (multiple replicas) with Distributed TensorFlow.
 
-## Download and Extract DataSet
+## Download and Extract DataSet (Common Task)
 
 First of all, download and extract CIFAR-10 binary version "[cifar-10-binary.tar.gz](http://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz)" (not python pickle version) in your working directory.    
 If you want to use TPU, save these files on Google Cloud Storage bucket.
@@ -34,15 +34,17 @@ See "[@Subaru : End-to-end Example For Distributed TensorFlow](https://netweblog
 
 ## Run on TPU
 
-Install Google Cloud SDK (on python or binary) in your machine.
+Here we use Google Compute VM instance for running.
 
-Set zone where you create your VM and TPU resource as follows.
+First, install Google Cloud SDK (python or binary version) in your working machine.
+
+Set zone where you plan to create your Compute VM instance and TPU resource as follows.
 
 ```bash
 gcloud config set compute/zone us-central1-c
 ```
 
-Create your Google Cloud VM instance as follows.
+Create your Google Cloud VM instance as follows. (Instance name and machine type are arbitrary.)
 
 ```bash
 gcloud compute instances create demo-vm \
@@ -74,7 +76,7 @@ gcloud beta compute tpus describe demo-tpu
 ```
 
 In your Google Cloud Console, go to "IAM & admin" - "IAM" and please push "+ADD".    
-Please fill your TPU service account name (which is copied above) in "New members" textbox and insert the following 3 roles in "Select a role".
+Please fill your TPU service account name (which is copied earlier) in "New members" textbox and insert the following 3 roles in "Select a role".
 
 - Project > Viewer
 - Logging > Logs Writer
@@ -95,13 +97,13 @@ python cifar10-cnn-tf-tpu.py \
   --num_replica 1
 ```
 
-After it's done, please see the results (in --out_dir directory) with TensorBoard. The following command starts the TensorBoard server. (gs://cloud-tpu-demo/out/1524451472/ is the directory in which the output results exist.)
+After it's done, please see the results (in --out_dir directory) with TensorBoard. The following command starts the TensorBoard server with default port 6006. (gs://cloud-tpu-demo/out/1524451472/ is the directory in which your output results exist.)
 
 ```bash
 tensorboard --logdir=gs://cloud-tpu-demo/out/1524451472/
 ```
 
-Please make sure to delete your TPU resource. (Otherwise you're charged.)
+Please make sure to delete your TPU resource. Otherwise you're charged.
 
 ```bash
 gcloud beta compute tpus delete demo-tpu

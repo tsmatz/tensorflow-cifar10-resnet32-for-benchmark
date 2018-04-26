@@ -115,3 +115,5 @@ You can check whether TPU resource exists as follows.
 ```bash
 gcloud beta compute tpus list
 ```
+
+![Model](model.png)

@@ -1,7 +1,8 @@
 # TensorFlow ResNet-32 Training for CIFAR-10 dataset (Script for Benchmarking)
 
 This python code runs ResNet-32 (without bottleneck) training for [CIFAR-10 dataset](http://www.cs.toronto.edu/~kriz/cifar.html) with TensorFlow framework.
-You can run this code on a variery of devices (CPU, GPU and TPU), and also run on the distributed multiple machines (multiple replicas) with Distributed TensorFlow.
+You can run this code on a variety of devices (CPU, GPU and TPU), and also run on the distributed multiple machines (multiple replicas) with Distributed TensorFlow.
+This model uses learning rate scheduled : 0.1 (< 40,000 steps), 0.01 (< 60,000 steps), 0.001 (< 80,000 steps), 0.0001 (>= 80,000 steps).
 
 ## Download and Extract DataSet (Common Task)
 

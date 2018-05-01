@@ -116,12 +116,13 @@ You can check whether TPU resource exists as follows.
 gcloud beta compute tpus list
 ```
 
+## Benchmark Result
+
+See "[@Subaru : TensorFlow Performance by GPU and TPU (w/ screen recording)](https://netweblog.wordpress.com/2018/04/25/tensorflow-performance-benchmark-cpu-gpu-tpu/)"
+
 ## Appendix : External Links
 
 Original model :
 [https://github.com/tensorflow/models/tree/master/research/resnet](https://github.com/tensorflow/models/tree/master/research/resnet)
-
-Benchmark results :
-[https://netweblog.wordpress.com/2018/04/25/tensorflow-performance-benchmark-cpu-gpu-tpu/](https://netweblog.wordpress.com/2018/04/25/tensorflow-performance-benchmark-cpu-gpu-tpu/)
 
 ![Model](model.png)

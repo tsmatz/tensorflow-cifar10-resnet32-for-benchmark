@@ -7,17 +7,18 @@ This model uses learning rate scheduled : 0.1 (< 40,000 steps), 0.01 (< 60,000 s
 ## Download and Extract DataSet (Common Task)
 
 First of all, download and extract CIFAR-10 binary version "[cifar-10-binary.tar.gz](http://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz)" (not python pickle version) in your working directory.    
-If you want to use TPU, save these files on Google Cloud Storage bucket.
+(If you use TPU, save these files on Google Cloud Storage bucket.)
 
-## Run on single machine (both CPU and GPU)
-
-Copy cifar10-cnn-tf.py and resnet_model.py in your working directory.
-
-Create the output directory.
+Create the output directory.    
+(If you use TPU, create folder in Google Cloud Storage bucket.)
 
 ```bash
 mkdir out
 ```
+
+## Run on single machine (both CPU and GPU)
+
+Copy cifar10-cnn-tf.py and resnet_model.py in your working directory.
 
 Run the following command.
 
@@ -59,7 +60,7 @@ Copy cifar10-cnn-tf-tpu.py and resnet_model.py on the working directory in your 
 
 ```bash
 gcloud compute scp cifar10-cnn-tf-tpu.py demo-vm:~/cifar10-cnn-tf-tpu.py
-gcloud compute scp resnet_model_tpu.py demo-vm:~/resnet_model_tpu.py
+gcloud compute scp resnet_model.py demo-vm:~/resnet_model.py
 ```
 
 Create TPU resource. (Please wait a minutes to ready.)    

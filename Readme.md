@@ -117,6 +117,12 @@ Make sure that your TPU is deleted in TPU resource list as follows. (No resource
 gcloud beta compute tpus list
 ```
 
+Delete your Google Cloud VM instance as follows (or stop).
+
+```bash
+gcloud compute instances delete demo-vm
+```
+
 > Note : Now Cloud ML Engine adds Cloud TPU support for training (See [here](https://cloud.google.com/blog/big-data/2018/05/cloud-ml-engine-adds-cloud-tpu-support-for-training)).
 
 ## Benchmark Result

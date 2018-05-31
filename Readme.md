@@ -111,7 +111,7 @@ Please make sure to delete your TPU resource. Otherwise you're charged.
 gcloud beta compute tpus delete demo-tpu
 ```
 
-You can check whether TPU resource exists as follows.
+Make sure that your TPU is deleted in TPU resource list as follows. (No resource will be listed, otherwise you will be charged.)
 
 ```bash
 gcloud beta compute tpus list
